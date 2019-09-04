@@ -1,0 +1,65 @@
+<div class="panel-body">
+    <form [formGroup]="form" (ngSubmit)="createJob(form.value)">
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="compagny">Titre</label>
+                <input type="text" name="title" class="form-control" placeholder="Titre de votre annonce" formControlName="title">
+
+                <label for="compagny">Entreprise</label>
+                <input type="text" name="compagny" class="form-control" placeholder="Nom de votre annonce" formControlName="compagny">
+
+                <label for="City">City</label>
+                <input type="text" name="city" class="form-control" placeholder="Ville du poste proposé" formControlName="city">
+
+                <label for="City">Code postal</label>
+                <input type="text" name="zipcode" class="form-control" placeholder="Code postal" formControlName="zipcode">
+                <br>
+                <div class="form-group">
+                    <label for="area">Déplacements</label><br>
+                    <div *ngFor="let area of areas">
+                        <input type="radio" [id]='"btn-" + area.value' name="area" [value]="area.value" formControlName="area">
+                        <label [for]='"btn-" + area.value'>{{area.name}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="description">Description</label>
+                <textarea name="description" class="form-control" cols="30" rows="10" formControlName="description"></textarea>
+
+                <div class="form-group">
+                    <label for="">Contract</label>
+                    <select name="contract" formControlName="contract" class="form-control">
+                    <option *ngFor="let ct of contractTypes" [value]="ct.value">{{ct.name}}</option>
+                </select>
+                </div>
+                <div class="form-group">
+                    <label for="field">Date de démarrage</label>
+                    <input type="date" name="startdate" class="form-control" formControlName="startdate">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label for="salary">Salaire</label>
+            <input type="text" name="salary" class="small-text" placeholder="salaire" formControlName="salary">
+            <select name="currency" formControlName="currency" class="currency">
+              <option *ngFor="let curr of currencies" [value]="curr.value">{{curr.name}}</option>  
+            </select>
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="experience">expérience</label>
+            <select name="experience" formControlName="experience">
+              <option *ngFor="let exp of experience" [value]="exp.value">{{exp.name}}</option>
+            </select>
+            <label for="status">statut</label>
+            <select name="status" formControlName="status">
+              <option *ngFor="let status of statuses" [value]="status.value">{{status.name}}</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-12">
+            <button type="submit" class="btn btn-success">Créer l'annonce</button>
+        </div>
+    </form>
+</div>

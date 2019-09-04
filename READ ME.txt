@@ -1,0 +1,99 @@
+10 / 02 / 2019
+
+CREATION D'UN FORMLUAIRE DE TYPE ' REATCIVE FORMS '
+
+    - Importer dans le app.modelue.ts
+    import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+    - Importer dans le fichier job-form-component.ts
+    import {FormBuilder, FormGroup } from '@angular/forms';
+
+    form:FormGroup; est une méthode
+    
+    On injecte dans le constructor le ( FormBuilder:FormBuilder)
+    - Dans le ngOninit ()
+        Va réccupérer ce que va crée notre FormBuilder a l'aide de la méthode group
+        Et la on peut transférer toute nos dnnées qui sont dans data.json dans job-add-component
+_______________
+
+CREATION DE LA VUE D'UN FORMULAIRE DE TYPE 'REACTIVE FORMS'
+
+    Job-add-component.html
+
+    Dans le implémenté un fomulaire : 
+    Ajoutons un Binding <form [formGroup]="form" (ngSubmit)="createJob()">
+
+    <label for="title"Titre>Titre</label>
+        <input type="text" name="title"
+        class="form-control"
+        placeholder="titre de votre annonce" 
+        formControlName="title">
+
+        // formControlName permet de récupérer chaque donnée du formulaire dans le TypeScript pour l'injecter dans le DOM
+        Avec les champs correspondant au fichier data.json
+
+        Job-add-component.ts
+
+        form: FormGroup;
+        
+        On crée une méthode createJob
+
+        createJob(){
+            On ajoute un Console.log pour voir les résultat
+            console.log(this.form.value);
+        }
+
+__________________________
+GENERER UN MENU DEROULANT
+
+        Job-add-component.ts
+
+        // Pour le menu déroulant
+        contractTypes = [
+            {id:1, name: 'Stage', value: 'intership'},
+            {id:2, name: 'Interim', value: 'temp'},
+            {id:3, name: 'Contrat à durée déterminée (CDD)', value: 'fixed-term'},
+            {id:4, name: 'Contrat a duréee indérterminé', value: 'permanent'},
+            {id:5, name: 'Indépendant', value: 'freelance'}
+        ];
+
+        Job-add-component.html
+
+        <div class="form-group col-sm-6 ">
+          <label for="">Contract</label>
+          <select name="contract" formControlName="contract">
+            <option *ngFor="let ct of contractTypes" [value]="ct.value">{{ct.name}}</option>
+          </select>
+        </div>
+
+        Important : formControlName="contract" fais référence au "contract" correspondant au data.json
+        Important : *ngFor="let ct of contractTypes" itére sur chaque données correspondant au data.json
+        Important : [value]="ct.value" est la variable crée dans le data.json
+        Important : {{ct.name}} affiche la valeur du *ngFor parcouru (ct.name) = (name: 'Stage')
+                                                                                 (name: 'Interim')
+                                                                                 (name: 'Contrat à durée déterminée (CDD)')
+                                                                                 (name: 'Contrat a duréee indérterminé')
+                                                                                 (name: 'Indépendant')
+
+_________________________
+GENERER DES BOUTONS RADIO
+   
+    Dans Job-add-component.ts
+    
+    On va pouroir générer dynamiquement certaine valeur a testé
+
+    On crée une variable avec un tableau d'objet
+
+    currencies = [
+        {id: 1, name: 'Euros', value: 'EU', symbol: '€'},
+        {id: 2, name: 'Livres sterling', value: 'POUNDS', symbol: '£'},
+        {id: 3, name: 'Francs CFA', value: 'CFA', symbol: 'CFA'},
+        {id: 4, name: 'Dollars canadien', value: 'CAD', symbol: '$'}
+    ];
+
+    Dans Job-add-component.html
+
+    
+    
+
+
